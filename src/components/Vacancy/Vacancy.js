@@ -3,58 +3,55 @@ import React, { Component } from  'react';
 class Vacancy extends Component {
 
 	state = {
+		dataJSON: '',
 		department: '',
-		list: [],
+		vacancyData: [],
 		vacancy: ''
 	};
-
-	dataObj = this.props.getJSON().departments;
-	department = Object.keys(this.dataObj).map((item) => {
-		return (
-			<option key={item.toString()} 
-			value={item}>
-				{item}
-			</option>
-		);
-	})
-
-	handleChange = (evt) => {
-		this.setState({ department: evt.target.value})
+	
+	componentDidMount() {
+		this.setState({
+			dataJSON: this.props.getJSON().departments
+		})
 	}
 
-	vacancyUpdate = () => {
-		const {department} = this.state;
-		return this.dataObj[department].map((item) => {
+	handleChangeDepartment = (evt) => {
+		const value = evt.target.value;
+		this.setState({ department: value,
+						vacancyData: this.state.dataJSON[value]})
+	}
+
+	handleChangeVacancy = (evt) => {
+		const value = evt.target.value;
+		this.setState({ vacancy: value})
+	}
+
+    optionWrapper = (data) => {
+    	return data.map((item) => {
 			return (
 				<option key={item.toString()} 
 				value={item}>
 					{item}
 				</option>
-			);
-		});
-	}
-
-	componentDidUpdate() {
-		const position = this.vacancyUpdate();
-		this.setState({
-			list: position
+			)
 		})
 	}
 
-
 	render () {
-		const {department, vacancy} = this.state;
+		const {dataJSON, department, vacancyData, vacancy} = this.state;
+		const departmentList = this.optionWrapper(Object.keys(dataJSON));
+		const vacancyList = this.optionWrapper(vacancyData);
 		return (
 			<section className="container">
 				<select className="custom-select"
 				 value={department}
-				 onChange={this.handleChange}>
-				  {this.department}
+				 onChange={this.handleChangeDepartment}>
+				  {departmentList}
 				</select>
 				<select className="custom-select"
 				 value={vacancy}
-				 onChange={this.handleChange}>
-				  {this.state.list}
+				 onChange={this.handleChangeVacancy}>
+				  {vacancyList}
 				</select>
 			</section>
 		); 

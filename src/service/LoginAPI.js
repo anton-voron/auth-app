@@ -131,6 +131,10 @@ export default class LoginAPI {
 		return JSON.parse(JsonData);
 	}
 
+	getDepartment = () => {
+		getJSON()
+	}
+
 }
 
 const JsonData = `{ 
