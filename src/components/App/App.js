@@ -3,8 +3,10 @@ import './App.css';
 
 import LoginAPI from '../../service/LoginAPI.js';
 import {LoginProvider} from '../LoginDataContext/LoginDataContext.js';
-import {RegPage} from '../context-component/withContextAPI.js';
+import {RegPage, VacPage} from '../context-component/withContextAPI.js';
 
+
+import { HashRouter , Route } from 'react-router-dom';
 
 class App extends Component {
   constructor () {
@@ -17,9 +19,12 @@ class App extends Component {
   render() {
     const {loginAPI} = this.state;
     return (
-      <LoginProvider value={loginAPI}>
-        <RegPage />
-      </LoginProvider>
+      <HashRouter>
+        <LoginProvider value={loginAPI}>
+          <Route path="/" exact={true} render={() => <RegPage /> } />
+          <Route path="/vacancy" exact={true} render={() => <VacPage /> } />
+        </LoginProvider>
+      </HashRouter>
     );
   }
 }

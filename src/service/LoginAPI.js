@@ -20,14 +20,9 @@ export default class LoginAPI {
 			userEmail: "test@gmail.com",
 			userPassword: "tesT123$",
 			userId: this._userId ++
-		},
-		{
-			userLogin: "User",
-			userEmail: "user@gmail.com",
-			userPassword: "userPass1!",
-			userId: this._userId ++
 		}
 	];
+
 
 	textValidator = (input) => {
 		const loginRegex = /(^[A-Za-z]{4,})$/;
@@ -71,7 +66,7 @@ export default class LoginAPI {
 			const emailValid= this.emailValidator(newEmail);
 			const passValid = this.passwordValidator(newPassword);
 
-			if( nameValid === true && surnameValid === true && emailValid === true && passValid === true && newPassword === confirmPassword) {
+			if(nameValid === true && surnameValid === true && emailValid === true && passValid === true && newPassword === confirmPassword) {
 				const newUser = {
 					userFirstName: newFirsrName,
 					userLastName: newLastName,
@@ -132,4 +127,15 @@ export default class LoginAPI {
 		return this.state;
 	};
 
+	getJSON = () => {
+		return JSON.parse(JsonData);
+	}
+
 }
+
+const JsonData = `{ 
+	"departments": { 
+		"Sales" : ["Sales Manager", "Account Manager" ],
+		"Marketing" : ["Creative Manager", "Marketing Coordinator", "Content Writer" ],
+		"Technology" : [ "Project Manager", "Software Developer", "PHP programmer", "Front End", "Quality Assurance" ] 
+	} }`

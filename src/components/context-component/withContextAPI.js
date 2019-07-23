@@ -1,5 +1,6 @@
 import withLoginAPI from '../HOC/withLoginAPI.js';
 import Registration from '../Registration/Registration.js';
+import Vacancy from '../Vacancy/Vacancy.js';
 
 const mapMethodsToRegistration = (loginAPI) => {
 	return {
@@ -11,8 +12,16 @@ const mapMethodsToRegistration = (loginAPI) => {
 	}
 }
 
+const mapMethodsToVacancy = (loginAPI) => {
+	return {
+		getJSON: loginAPI.getJSON,
+	}
+}
+
 const RegPage = withLoginAPI(mapMethodsToRegistration)(Registration);
+const VacPage = withLoginAPI(mapMethodsToVacancy)(Vacancy);
 
 export {
-	RegPage
+	RegPage,
+	VacPage
 }

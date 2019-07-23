@@ -7,6 +7,7 @@ import {
 	Company,
 	Password,
 } from '../InputForms/';
+import { withRouter } from 'react-router-dom';
 
 class Registration extends Component {
 
@@ -89,8 +90,9 @@ class Registration extends Component {
 		const properties = Object.keys(fields).map(value => fields[value]);
 		if(verdict) {
 			this.props.submitReg(...properties);
+			this.props.history.push('/vacancy')
 		} else {
-			alert("You have to fill all fields")
+			alert("You have to fill all fields");
 		}
 	}
 	render() {
@@ -145,4 +147,4 @@ class Registration extends Component {
 	}
 }
 
-export default Registration;
+export default withRouter(Registration);
