@@ -1,0 +1,1 @@
+{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,OACC,aAAc,CACd,WAAY,CACZ,WACD,CAGA,cACC,gBAED","file":"main.4dc3c9f6.chunk.css","sourcesContent":[".title{\r\n\tdisplay: block;\r\n\twidth: 290px;\r\n\tmargin: auto;\r\n}\t\r\n\r\n\r\n.section-size {\r\n\tmin-height: 600px;\r\n\t\r\n}\r\n"]}

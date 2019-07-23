@@ -1,0 +1,18 @@
+body {
+	background: url(img/georgie-cobbs-bKjHgo_Lbpo-unsplash.jpg) no-repeat;
+	background-attachment: fixed;
+    background-size: cover;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.wrapper-central {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
