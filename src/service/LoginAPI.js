@@ -52,7 +52,7 @@ export default class LoginAPI {
 	};
 
 	emailValidator = (input) => {
-		const emailRegex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+		const emailRegex = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+.([A-Za-z]{2,4})$/;
 		if(emailRegex.test(input)) {
 			console.log('Sutiable');
 			return true;
@@ -63,9 +63,7 @@ export default class LoginAPI {
 
 	submitReg = (newFirsrName, newLastName, newLogin, newEmail, newCompany, newPassword, confirmPassword) => {
 		const userData = this._userData.find((user) => {
-			if (user.userLogin === newLogin || user.userEmail === newEmail) {
-				return user
-			}	
+			return (user.userLogin === newLogin || user.userEmail === newEmail)
 		});
 		if(userData === undefined) {
 			const nameValid = this.textValidator(newFirsrName);
@@ -90,7 +88,7 @@ export default class LoginAPI {
 					access: true,
 					...newUser,
 				}
-				console.log(this.state)
+				console.log(this.state);
 				alert("You have registered successfully");
 				return true;
 			} else if (newPassword !== confirmPassword){
@@ -148,7 +146,7 @@ export default class LoginAPI {
 	};
 	
 	isLoggedIn = () => {
-		return this.state.access
+		return this.state.access;
 	}
 
 }

@@ -1,5 +1,5 @@
 import React, { Component } from  'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class Vacancy extends Component {
 
@@ -46,13 +46,12 @@ class Vacancy extends Component {
 	}
 
 	render () {
-		const {isLoggedIn} = this.props;
 		const {dataJSON, department, vacancyData, vacancy} = this.state;
 		const departmentList = this.optionWrapper(Object.keys(dataJSON));
 		const vacancyList = this.optionWrapper(vacancyData);
 		return (
-			<section className="container wrapper-central vertical-central">
-				<div className="col-md-8 bg-light p-3 wrapper-central">
+			<section className="container wrapper-central section-size">
+				<div className="col-md-12 bg-light p-3 wrapper-central">
 					<h2> Choose your specialization </h2>
 					<select className="custom-select mb-3"
 					 value={department}

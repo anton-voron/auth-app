@@ -5,11 +5,7 @@
 }	
 
 
-.vertical-central{
-	margin-top: 10%;
+.section-size {
+	min-height: 600px;
 	
-}
-
-.wrapper {
-
 }

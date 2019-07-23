@@ -80,6 +80,9 @@ class Registration extends Component {
 							this.setState({error}) 
 							break;
 						};
+			default: {
+				break;
+			}
 		}
 	}
 
@@ -89,8 +92,10 @@ class Registration extends Component {
 		const verdict = Object.keys(error).every(value => error[value] === true);
 		const properties = Object.keys(fields).map(value => fields[value]);
 		if(verdict) {
-			this.props.submitReg(...properties);
-			this.props.history.push('/vacancy')
+			const res = this.props.submitReg(...properties);
+			if(res) {
+				this.props.history.push('/vacancy')
+			}
 		} else {
 			alert("You have to fill all fields");
 		}
@@ -99,8 +104,8 @@ class Registration extends Component {
 		const {userFirstName, userLastName, userLogin, userEmail, userCompany, userPassword, confirmPassword} = this.state;
 		const {error:{errorFirstName, errorLastName, errorLogin, errorEmail, errorPassword, errorConfirmPassword}} = this.state;
 		return (
-			<section className="container wrapper-central vertical-central">
-			<form className="bg-light p-5 col-md-8 wrapper-central"
+			<section className="container wrapper-central section-size">
+			<form className="bg-light col-md-8 wrapper-central"
 				onSubmit = {this.submitReg}>
 				<h2 className="title mb-3">Register a new user</h2>
 				<div className="row justify-content-center">
@@ -118,6 +123,7 @@ class Registration extends Component {
 				    <Login 
 				    	onChange = {this.onChange} 
 						onBlur={this.onBlur}
+						value={userLogin}
 						error={errorLogin}/>
 				    <Email 
 				    	onChange = {this.onChange} 

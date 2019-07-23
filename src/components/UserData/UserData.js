@@ -28,7 +28,8 @@ const UserData = (props) => {
       alert("You have successfully sent data")
    }
    return (
-    <section className="container vertical-central bg-light p-5">
+    <div className="container wrapper-central section-size">
+    <section className="container bg-light p-3">
         <h2> Check your informatiom </h2>
       	<div className="item-details card">
   	        <ul className="list-group list-group-flush">
@@ -51,6 +52,7 @@ const UserData = (props) => {
         </button>
         </div>
       </section>
+      </div>
   );
 }
 

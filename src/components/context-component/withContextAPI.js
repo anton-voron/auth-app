@@ -21,7 +21,8 @@ const mapMethodsToVacancy = (loginAPI) => {
 		getDepartment: loginAPI.getDepartment,
 		getVacancy: loginAPI.getVacancy,
 		onJobSubmit: loginAPI.onJobSubmit,
-		getUserData: loginAPI.getUserData
+		getUserData: loginAPI.getUserData,
+		isLoggedIn: loginAPI.isLoggedIn
 	}
 }
 
@@ -45,10 +46,10 @@ const personRender = () => {
 				};
 
 const RegPage = withLoginAPI(mapMethodsToRegistration)(Registration);
-const VacPage = withLoginAPI(mapMethodsToVacancy)(Vacancy);
+const VacPage = withLoginAPI(mapMethodsToVacancy)(HocLoggedIn(Vacancy));
 const UserPage = withLoginAPI(mapMethodsToUser)
 								 (withChildFunction (
-								 	(UserData), personRender())
+								 	(HocLoggedIn(UserData)), personRender())
 							 	 );
 
 export {
