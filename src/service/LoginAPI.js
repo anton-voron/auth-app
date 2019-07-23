@@ -8,18 +8,25 @@ export default class LoginAPI {
 			userEmail: null,
 			userCompany: null,
 			userPassword: null,
+			companyDepartment: null,
+			vacancy: null,
 			userId: null,
 		}
-	}
+	};
 
 	_userId = 0;
 
 	_userData = [
-		{
-			userLogin: "test",
+		{	
+			userFirstName: "Test",
+			userLastName: "Test",
+			userLogin: "Test",
 			userEmail: "test@gmail.com",
+			userCompany: "Test",
 			userPassword: "tesT123$",
-			userId: this._userId ++
+			companyDepartment: 'Front-end',
+			vacancy: 'junior',
+			userId: this._userId ++,
 		}
 	];
 
@@ -52,7 +59,7 @@ export default class LoginAPI {
 		} else {
 			return 'Invalid email';
 		}
-	}
+	};
 
 	submitReg = (newFirsrName, newLastName, newLogin, newEmail, newCompany, newPassword, confirmPassword) => {
 		const userData = this._userData.find((user) => {
@@ -74,10 +81,17 @@ export default class LoginAPI {
 					userEmail: newEmail,
 					userCompany: newCompany,
 					userPassword: newPassword,
+					companyDepartment: '',
+					vacancy: '',
 					userId: this._userId ++
 					}
-				alert("You have registered successfully");
 				this._userData.push(newUser);
+				this.state = {
+					access: true,
+					...newUser,
+				}
+				console.log(this.state)
+				alert("You have registered successfully");
 				return true;
 			} else if (newPassword !== confirmPassword){
 				alert('Passwords do not match');
@@ -97,42 +111,44 @@ export default class LoginAPI {
 		}
 	};
 
-
-	onLogin = (inputLogin, inputPassword) => {
-		const userData = this._userData.find((user) => {
-			if (user.userLogin === inputLogin && user.userPassword === inputPassword) {
-				return user
-			}
-		})
-
-		if (userData) {
-			this.state = {
-				access: true,
-				...userData,
-			}
-			console.log(this.state)
-		} else { 
-			alert("Invalid Data")
-			return false 
-		}	
+	getJSON = () => {
+		return JSON.parse(JsonData);
 	};
 
+	getDepartment = (department) => {
+		const vacancyList = this.getJSON().departments[department];
+		this.state=({
+			...this.state,
+			companyDepartment: department
+		})
+		console.log(this.state);
+		return vacancyList;
+	};
 
-	isLoggedIn = () => {
-		return this.state.access;
+	getVacancy = (vacancy) => {
+		this.state=({
+			...this.state,
+			vacancy
+		})
+		console.log(this.state);
+	};
+
+	onJobSubmit = () => {
+		const idx = this._userData.findIndex((user) => {
+			return user.userLogin === this.state.userLogin && user.userPassword === this.state.userPassword
+		});
+		if(idx!==-1) {
+			this._userData[idx]={...this.state};
+		}
+		console.log(this._userData); 
 	};
 
 	getUserData = () => {
-		console.log(this.state.userLogin);
-		return this.state;
+		return this.state
 	};
-
-	getJSON = () => {
-		return JSON.parse(JsonData);
-	}
-
-	getDepartment = () => {
-		getJSON()
+	
+	isLoggedIn = () => {
+		return this.state.access
 	}
 
 }
@@ -142,4 +158,4 @@ const JsonData = `{
 		"Sales" : ["Sales Manager", "Account Manager" ],
 		"Marketing" : ["Creative Manager", "Marketing Coordinator", "Content Writer" ],
 		"Technology" : [ "Project Manager", "Software Developer", "PHP programmer", "Front End", "Quality Assurance" ] 
-	} }`
+	} }`;

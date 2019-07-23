@@ -99,9 +99,11 @@ class Registration extends Component {
 		const {userFirstName, userLastName, userLogin, userEmail, userCompany, userPassword, confirmPassword} = this.state;
 		const {error:{errorFirstName, errorLastName, errorLogin, errorEmail, errorPassword, errorConfirmPassword}} = this.state;
 		return (
-			<form className="container"
+			<section className="container wrapper-central vertical-central">
+			<form className="bg-light p-5 col-md-8 wrapper-central"
 				onSubmit = {this.submitReg}>
-				<div className="form">
+				<h2 className="title mb-3">Register a new user</h2>
+				<div className="row justify-content-center">
 					<FirstName 
 						onChange = {this.onChange} 
 						onBlur={this.onBlur}
@@ -140,9 +142,11 @@ class Registration extends Component {
 						error={errorConfirmPassword}/>
 	  			</div>
 	  			<button type= "submit" className="btn btn-primary"
-							onSubmit = {this.submitReg}> 
-						Submit </button>
+						onSubmit = {this.submitReg}> 
+							Submit 
+				</button>
   			</form>
+  			</section>
 		);
 	}
 }

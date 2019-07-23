@@ -1,4 +1,5 @@
 import React, { Component } from  'react';
+import { withRouter, Redirect } from 'react-router-dom';
 
 class Vacancy extends Component {
 
@@ -19,11 +20,13 @@ class Vacancy extends Component {
 		const value = evt.target.value;
 		this.setState({ department: value,
 						vacancyData: this.state.dataJSON[value]})
+		this.props.getDepartment(value)
 	}
 
 	handleChangeVacancy = (evt) => {
 		const value = evt.target.value;
 		this.setState({ vacancy: value})
+		this.props.getVacancy(value);
 	}
 
     optionWrapper = (data) => {
@@ -37,25 +40,38 @@ class Vacancy extends Component {
 		})
 	}
 
+	nextStep = () => {
+		this.props.onJobSubmit();
+		this.props.history.push('/user-page')
+	}
+
 	render () {
+		const {isLoggedIn} = this.props;
 		const {dataJSON, department, vacancyData, vacancy} = this.state;
 		const departmentList = this.optionWrapper(Object.keys(dataJSON));
 		const vacancyList = this.optionWrapper(vacancyData);
 		return (
-			<section className="container">
-				<select className="custom-select"
-				 value={department}
-				 onChange={this.handleChangeDepartment}>
-				  {departmentList}
-				</select>
-				<select className="custom-select"
-				 value={vacancy}
-				 onChange={this.handleChangeVacancy}>
-				  {vacancyList}
-				</select>
+			<section className="container wrapper-central vertical-central">
+				<div className="col-md-8 bg-light p-3 wrapper-central">
+					<h2> Choose your specialization </h2>
+					<select className="custom-select mb-3"
+					 value={department}
+					 onChange={this.handleChangeDepartment}>
+					  {departmentList}
+					</select>
+					<select className="custom-select mb-3"
+					 value={vacancy}
+					 onChange={this.handleChangeVacancy}>
+					  {vacancyList}
+					</select>
+					<button type= "submit" className="btn btn-primary"
+						onClick = {this.nextStep}> 
+						Next Step 
+					</button>
+				</div>
 			</section>
 		); 
 	}
 }
 
-export default Vacancy;
+export default withRouter(Vacancy);

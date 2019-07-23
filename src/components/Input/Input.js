@@ -12,7 +12,7 @@ const Input = (props) => {
  		classNames += " is-invalid";
  	}
 	return (
-		<div className ="d-flex flex-column">
+		<div className ="d-flex flex-column col-md-12">
 			<div className="input-group mb-3">
 				<div className="input-group-prepend">
 				   	<span className="input-group-text">{symbol}</span>
